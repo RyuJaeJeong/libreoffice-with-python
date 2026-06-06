@@ -1,0 +1,25 @@
+FROM python:3.12.13
+
+RUN apt-get update && \
+    apt-get install -y libreoffice fontconfig curl && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /usr/share/fonts/truetype/nanum && \
+    curl -L "https://github.com/google/fonts/raw/main/ofl/nanumgothic/NanumGothic-Regular.ttf"     -o /usr/share/fonts/truetype/nanum/NanumGothic.ttf && \
+    curl -L "https://github.com/google/fonts/raw/main/ofl/nanumgothic/NanumGothic-Bold.ttf"        -o /usr/share/fonts/truetype/nanum/NanumGothicBold.ttf && \
+    curl -L "https://github.com/google/fonts/raw/main/ofl/nanumgothic/NanumGothic-ExtraBold.ttf"   -o /usr/share/fonts/truetype/nanum/NanumGothicExtraBold.ttf && \
+    curl -L "https://github.com/google/fonts/raw/main/ofl/nanummyeongjo/NanumMyeongjo-Regular.ttf" -o /usr/share/fonts/truetype/nanum/NanumMyeongjo.ttf && \
+    curl -L "https://github.com/google/fonts/raw/main/ofl/nanummyeongjo/NanumMyeongjo-Bold.ttf"    -o /usr/share/fonts/truetype/nanum/NanumMyeongjoBold.ttf && \
+    curl -L "https://github.com/hiun/NanumBarunGothic/raw/master/NanumBarunGothic.ttf"             -o /usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf && \
+    curl -L "https://github.com/hiun/NanumBarunGothic/raw/master/NanumBarunGothicBold.ttf"         -o /usr/share/fonts/truetype/nanum/NanumBarunGothicBold.ttf
+
+RUN mkdir -p /usr/share/fonts/opentype/noto-cjk && \
+    curl -L "https://github.com/notofonts/noto-cjk/raw/main/Sans/OTF/Korean/NotoSansCJKkr-Regular.otf" -o /usr/share/fonts/opentype/noto-cjk/NotoSansCJKkr-Regular.otf && \
+    curl -L "https://github.com/notofonts/noto-cjk/raw/main/Sans/OTF/Korean/NotoSansCJKkr-Bold.otf"    -o /usr/share/fonts/opentype/noto-cjk/NotoSansCJKkr-Bold.otf && \
+    curl -L "https://github.com/notofonts/noto-cjk/raw/main/Sans/OTF/Korean/NotoSansCJKkr-Light.otf"   -o /usr/share/fonts/opentype/noto-cjk/NotoSansCJKkr-Light.otf && \
+    curl -L "https://github.com/notofonts/noto-cjk/raw/main/Sans/OTF/Korean/NotoSansCJKkr-Medium.otf"  -o /usr/share/fonts/opentype/noto-cjk/NotoSansCJKkr-Medium.otf && \
+    curl -L "https://github.com/notofonts/noto-cjk/raw/main/Serif/OTF/Korean/NotoSerifCJKkr-Regular.otf" -o /usr/share/fonts/opentype/noto-cjk/NotoSerifCJKkr-Regular.otf && \
+    curl -L "https://github.com/notofonts/noto-cjk/raw/main/Serif/OTF/Korean/NotoSerifCJKkr-Bold.otf"    -o /usr/share/fonts/opentype/noto-cjk/NotoSerifCJKkr-Bold.otf && \
+    fc-cache -fv
+
+CMD ["/bin/bash"]
